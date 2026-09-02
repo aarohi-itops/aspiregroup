@@ -1,1 +1,472 @@
-UNDER MAINTENANCE
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aspire Group Global | Coming Soon</title>
+    <meta name="description" content="Aspire Group Global is currently undergoing maintenance. We will be back soon.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #071A2B;
+            --deep-navy: #04111D;
+            --gold: #C9A45C;
+            --light-gold: #E2C98F;
+            --white: #FFFFFF;
+            --muted: #A9B5C1;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "DM Sans", sans-serif;
+            background:
+                radial-gradient(circle at 80% 15%, rgba(201,164,92,0.14), transparent 30%),
+                radial-gradient(circle at 10% 85%, rgba(201,164,92,0.08), transparent 25%),
+                linear-gradient(135deg, var(--deep-navy), var(--navy));
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Decorative background */
+        .background {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0.35;
+        }
+
+        .orb.one {
+            width: 420px;
+            height: 420px;
+            right: -180px;
+            top: -150px;
+            border: 1px solid rgba(201,164,92,0.25);
+        }
+
+        .orb.two {
+            width: 600px;
+            height: 600px;
+            left: -350px;
+            bottom: -350px;
+            border: 1px solid rgba(201,164,92,0.15);
+        }
+
+        .grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.035;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px);
+            background-size: 70px 70px;
+        }
+
+        /* Main */
+        .wrapper {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 35px 7%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeDown 1s ease forwards;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border: 1px solid var(--gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Playfair Display", serif;
+            font-size: 21px;
+            color: var(--gold);
+            transform: rotate(45deg);
+        }
+
+        .brand-mark span {
+            transform: rotate(-45deg);
+        }
+
+        .brand-name {
+            letter-spacing: 2.5px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .brand-name small {
+            display: block;
+            color: var(--gold);
+            font-size: 8px;
+            letter-spacing: 3px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px rgba(201,164,92,0.08);
+            animation: pulse 2s infinite;
+        }
+
+        /* Hero */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .hero {
+            max-width: 850px;
+            animation: fadeUp 1.1s ease forwards;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 27px;
+        }
+
+        .eyebrow::before,
+        .eyebrow::after {
+            content: "";
+            width: 35px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.7;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(55px, 8vw, 105px);
+            line-height: 0.95;
+            font-weight: 600;
+            letter-spacing: -3px;
+            margin-bottom: 30px;
+        }
+
+        h1 span {
+            color: var(--gold);
+        }
+
+        .description {
+            max-width: 610px;
+            margin: 0 auto 40px;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        /* Progress */
+        .progress-wrapper {
+            width: min(430px, 90%);
+            margin: 0 auto 42px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #82909D;
+        }
+
+        .progress-bar {
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 72%;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+            animation: loading 2.5s ease-in-out infinite alternate;
+        }
+
+        /* Contact */
+        .contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 25px;
+            border: 1px solid rgba(201,164,92,0.45);
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            transition: 0.3s ease;
+            background: rgba(255,255,255,0.025);
+        }
+
+        .contact:hover {
+            background: var(--gold);
+            color: var(--deep-navy);
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(201,164,92,0.15);
+        }
+
+        .mail-icon {
+            font-size: 17px;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            color: #667583;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: fadeUp 1.3s ease forwards;
+        }
+
+        footer .email {
+            color: var(--gold);
+            text-transform: lowercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 5px rgba(201,164,92,0.08);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(201,164,92,0.02);
+            }
+        }
+
+        @keyframes loading {
+            from {
+                width: 68%;
+            }
+            to {
+                width: 76%;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            .wrapper {
+                padding: 25px 6%;
+            }
+
+            .status {
+                display: none;
+            }
+
+            .brand-name {
+                font-size: 13px;
+            }
+
+            main {
+                padding: 60px 0;
+            }
+
+            h1 {
+                font-size: 56px;
+                letter-spacing: -2px;
+            }
+
+            .description {
+                font-size: 14px;
+                line-height: 1.8;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .brand-mark {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="grid"></div>
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+    </div>
+
+    <div class="wrapper">
+
+        <header>
+
+            <a href="#" class="brand">
+                <div class="brand-mark">
+                    <span>A</span>
+                </div>
+
+                <div class="brand-name">
+                    ASPIRE GROUP
+                    <small>GLOBAL</small>
+                </div>
+            </a>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Website Maintenance
+            </div>
+
+        </header>
+
+
+        <main>
+
+            <section class="hero">
+
+                <div class="eyebrow">
+                    We'll Be Back Soon
+                </div>
+
+                <h1>
+                    Something<br>
+                    <span>Great</span> Is Coming.
+                </h1>
+
+                <p class="description">
+                    We are currently enhancing our digital experience.
+                    Our website is undergoing scheduled maintenance
+                    and will be back online shortly.
+                </p>
+
+                <div class="progress-wrapper">
+
+                    <div class="progress-label">
+                        <span>Website Progress</span>
+                        <span>Almost Ready</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+
+                </div>
+
+                <a
+                    href="mailto:info@aspiregroupglobal.com"
+                    class="contact"
+                >
+                    <span class="mail-icon">✉</span>
+                    Contact us at
+                    <strong>info@aspiregroupglobal.com</strong>
+                </a>
+
+            </section>
+
+        </main>
+
+
+        <footer>
+
+            <span>
+                © 2026 Aspire Group Global
+            </span>
+
+            <span>
+                For enquiries:
+                <span class="email">
+                    info@aspiregroupglobal.com
+                </span>
+            </span>
+
+        </footer>
+
+    </div>
+
+</body>
+</html>
+```
