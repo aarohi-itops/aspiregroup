@@ -4,18 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Aspire Management Consulting W.L.L. | Under Maintenance</title>
+    <title>Aspire Management Consulting W.L.L. | Coming Soon</title>
 
     <meta name="description"
-          content="Aspire Management Consulting W.L.L. - Doha, Qatar. Our website is currently under maintenance.">
+        content="Aspire Management Consulting W.L.L. - Doha, Qatar. Our website is currently under maintenance.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
+
+        /* =========================================
+           ROOT COLORS
+        ========================================= */
+
+        :root {
+            --primary: #082A5A;
+            --primary-dark: #051D40;
+            --primary-light: #0D3975;
+
+            --orange: #E46E24;
+            --orange-light: #F28A45;
+            --orange-dark: #C95716;
+
+            --white: #FFFFFF;
+            --text: #F7F9FC;
+            --muted: #B7C4D5;
+
+            --border: rgba(255,255,255,0.13);
+            --glass: rgba(255,255,255,0.055);
+        }
+
+
+        /* =========================================
+           RESET
+        ========================================= */
 
         * {
             margin: 0;
@@ -23,90 +49,152 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --bg: #050505;
-            --bg-light: #0b0b0b;
-            --white: #ffffff;
-            --muted: #a4a4a4;
-            --line: rgba(255,255,255,0.12);
-            --accent: #ffffff;
-        }
 
         html {
             scroll-behavior: smooth;
         }
 
+
         body {
             min-height: 100vh;
-            background: var(--bg);
-            color: var(--white);
-            font-family: "DM Sans", sans-serif;
+
+            font-family: "Manrope", sans-serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 85% 10%,
+                    rgba(228,110,36,0.15),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 5% 90%,
+                    rgba(13,57,117,0.8),
+                    transparent 35%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #051D40 0%,
+                    #082A5A 48%,
+                    #061F43 100%
+                );
+
             overflow-x: hidden;
         }
 
-        /* =========================
-           BACKGROUND
-        ========================= */
+
+        /* =========================================
+           BACKGROUND EFFECTS
+        ========================================= */
 
         .background {
             position: fixed;
             inset: 0;
+
             z-index: 0;
+
             pointer-events: none;
+
             overflow: hidden;
         }
+
 
         .grid {
             position: absolute;
             inset: 0;
 
+            opacity: 0.055;
+
             background-image:
                 linear-gradient(
-                    rgba(255,255,255,0.035) 1px,
+                    rgba(255,255,255,0.5) 1px,
                     transparent 1px
                 ),
                 linear-gradient(
                     90deg,
-                    rgba(255,255,255,0.035) 1px,
+                    rgba(255,255,255,0.5) 1px,
                     transparent 1px
                 );
 
-            background-size: 80px 80px;
+            background-size: 75px 75px;
 
-            mask-image: linear-gradient(
-                to bottom,
-                transparent,
-                black 25%,
-                black 75%,
-                transparent
-            );
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    transparent,
+                    black 20%,
+                    black 80%,
+                    transparent
+                );
         }
 
-        .glow {
+
+        .orb {
             position: absolute;
-            width: 600px;
-            height: 600px;
+
             border-radius: 50%;
-            background: rgba(255,255,255,0.035);
-            filter: blur(100px);
+
+            filter: blur(10px);
+
+            opacity: 0.45;
         }
 
-        .glow-one {
-            top: -300px;
-            right: -200px;
+
+        .orb-one {
+            width: 500px;
+            height: 500px;
+
+            right: -250px;
+            top: -230px;
+
+            border: 1px solid rgba(228,110,36,0.3);
+
+            box-shadow:
+                inset 0 0 100px rgba(228,110,36,0.08),
+                0 0 120px rgba(228,110,36,0.08);
         }
 
-        .glow-two {
-            bottom: -350px;
-            left: -250px;
+
+        .orb-two {
+            width: 650px;
+            height: 650px;
+
+            left: -400px;
+            bottom: -420px;
+
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
-        /* =========================
-           PAGE
-        ========================= */
+
+        .orange-glow {
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            right: 12%;
+            top: 30%;
+
+            background: rgba(228,110,36,0.16);
+
+            border-radius: 50%;
+
+            filter: blur(90px);
+
+            animation: floatGlow 7s ease-in-out infinite;
+        }
+
+
+        /* =========================================
+           MAIN PAGE
+        ========================================= */
 
         .page {
             position: relative;
+
             z-index: 1;
 
             min-height: 100vh;
@@ -117,255 +205,86 @@
             padding: 28px 7%;
         }
 
-        /* =========================
+
+        /* =========================================
            NAVBAR
-        ========================= */
+        ========================================= */
 
         nav {
-            width: 100%;
-
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
-            padding-bottom: 25px;
+            padding: 0 0 24px;
 
-            border-bottom: 1px solid var(--line);
+            border-bottom: 1px solid var(--border);
 
-            animation: navIn 1s ease forwards;
+            animation: slideDown 0.8s ease forwards;
         }
 
+
         .logo {
-            width: 290px;
+            width: 310px;
+
             max-width: 48%;
+
             height: auto;
+
             object-fit: contain;
         }
 
+
         .nav-right {
             display: flex;
+
             align-items: center;
+
             gap: 10px;
 
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            padding: 10px 16px;
 
-            color: #888;
-        }
+            border: 1px solid rgba(228,110,36,0.28);
 
-        .live-dot {
-            width: 7px;
-            height: 7px;
+            background: rgba(228,110,36,0.07);
 
-            border-radius: 50%;
+            border-radius: 50px;
 
-            background: #fff;
-
-            box-shadow: 0 0 0 6px rgba(255,255,255,0.05);
-
-            animation: pulse 2s infinite;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        main {
-            flex: 1;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 80px 0;
-        }
-
-        .hero {
-            width: 100%;
-            max-width: 950px;
-
-            text-align: center;
-
-            animation: heroIn 1.1s ease forwards;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-
-            margin-bottom: 30px;
-
-            color: #aaa;
-
-            font-size: 11px;
-            font-weight: 600;
-
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        .eyebrow::before,
-        .eyebrow::after {
-            content: "";
-
-            width: 35px;
-            height: 1px;
-
-            background: #777;
-        }
-
-        h1 {
-            font-family: "Manrope", sans-serif;
-
-            font-size: clamp(55px, 8vw, 105px);
-
-            line-height: 0.95;
-
-            letter-spacing: -5px;
-
-            font-weight: 800;
-
-            margin-bottom: 30px;
-        }
-
-        h1 .outline {
-            color: transparent;
-
-            -webkit-text-stroke: 1px rgba(255,255,255,0.8);
-        }
-
-        .description {
-            max-width: 620px;
-
-            margin: 0 auto 45px;
-
-            color: var(--muted);
-
-            font-size: 16px;
-
-            line-height: 1.9;
-        }
-
-        /* =========================
-           STATUS CARD
-        ========================= */
-
-        .maintenance-card {
-            width: min(570px, 100%);
-
-            margin: 0 auto 35px;
-
-            padding: 20px 24px;
-
-            border: 1px solid var(--line);
-
-            background: rgba(255,255,255,0.025);
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            text-align: left;
-        }
-
-        .maintenance-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .gear {
-            width: 38px;
-            height: 38px;
-
-            border: 1px solid rgba(255,255,255,0.25);
-
-            border-radius: 50%;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 17px;
-
-            animation: rotate 5s linear infinite;
-        }
-
-        .maintenance-title {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .maintenance-subtitle {
-            margin-top: 4px;
-
-            color: #777;
+            color: #D7DFEA;
 
             font-size: 10px;
 
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .status-text {
-            font-size: 10px;
-
-            color: #999;
+            font-weight: 600;
 
             letter-spacing: 1.5px;
 
             text-transform: uppercase;
         }
 
-        /* =========================
-           EMAIL BUTTON
-        ========================= */
 
-        .email-button {
-            display: inline-flex;
+        .status-dot {
+            width: 8px;
+            height: 8px;
 
-            align-items: center;
-            justify-content: center;
+            border-radius: 50%;
 
-            gap: 13px;
-
-            padding: 17px 27px;
-
-            color: #050505;
-
-            background: #fff;
-
-            text-decoration: none;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            letter-spacing: 0.3px;
-
-            transition: all 0.3s ease;
-        }
-
-        .email-button:hover {
-            transform: translateY(-4px);
-
-            background: #ddd;
+            background: var(--orange);
 
             box-shadow:
-                0 15px 40px rgba(255,255,255,0.12);
+                0 0 0 5px rgba(228,110,36,0.12),
+                0 0 15px rgba(228,110,36,0.6);
+
+            animation: pulse 2s infinite;
         }
 
-        .email-icon {
-            font-size: 17px;
-        }
 
-        /* =========================
-           COMPANY INFO
-        ========================= */
+        /* =========================================
+           HERO
+        ========================================= */
 
-        .company-info {
-            margin-top: 55px;
+        main {
+            flex: 1;
 
             display: flex;
 
@@ -373,36 +292,116 @@
 
             align-items: center;
 
-            gap: 35px;
+            padding: 75px 0;
+        }
 
-            color: #777;
+
+        .hero {
+            width: 100%;
+
+            max-width: 920px;
+
+            text-align: center;
+
+            animation: heroUp 1s ease forwards;
+        }
+
+
+        /* =========================================
+           EYEBROW
+        ========================================= */
+
+        .eyebrow {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 27px;
+
+            color: var(--orange);
 
             font-size: 11px;
 
-            letter-spacing: 1px;
+            font-weight: 700;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
         }
 
-        .company-info span {
-            color: #bbb;
+
+        .eyebrow::before,
+        .eyebrow::after {
+            content: "";
+
+            width: 32px;
+
+            height: 1px;
+
+            background: var(--orange);
         }
 
-        .separator {
-            width: 4px;
-            height: 4px;
 
-            border-radius: 50%;
+        /* =========================================
+           HEADING
+        ========================================= */
 
-            background: #555;
+        h1 {
+            font-size: clamp(54px, 8vw, 100px);
+
+            line-height: 0.98;
+
+            letter-spacing: -5px;
+
+            font-weight: 800;
+
+            margin-bottom: 28px;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
 
-        footer {
-            border-top: 1px solid var(--line);
+        h1 .orange {
+            color: var(--orange);
 
-            padding-top: 22px;
+            position: relative;
+        }
+
+
+        h1 .outline {
+            color: transparent;
+
+            -webkit-text-stroke: 1.5px rgba(255,255,255,0.75);
+        }
+
+
+        /* =========================================
+           DESCRIPTION
+        ========================================= */
+
+        .description {
+            max-width: 650px;
+
+            margin: 0 auto 42px;
+
+            color: var(--muted);
+
+            font-size: 15px;
+
+            line-height: 1.9;
+        }
+
+
+        /* =========================================
+           MAINTENANCE BOX
+        ========================================= */
+
+        .maintenance-box {
+            width: min(600px, 100%);
+
+            margin: 0 auto 32px;
+
+            padding: 22px 25px;
 
             display: flex;
 
@@ -410,34 +409,272 @@
 
             justify-content: space-between;
 
-            color: #555;
+            text-align: left;
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.07),
+                    rgba(255,255,255,0.025)
+                );
+
+            backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.15);
+
+            transition: 0.3s ease;
+        }
+
+
+        .maintenance-box:hover {
+            transform: translateY(-3px);
+
+            border-color: rgba(228,110,36,0.35);
+
+            box-shadow:
+                0 20px 70px rgba(0,0,0,0.2);
+        }
+
+
+        .maintenance-left {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .gear {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--orange),
+                    var(--orange-dark)
+                );
+
+            color: white;
+
+            font-size: 18px;
+
+            box-shadow:
+                0 8px 25px rgba(228,110,36,0.25);
+
+            animation: rotate 5s linear infinite;
+        }
+
+
+        .maintenance-title {
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: white;
+        }
+
+
+        .maintenance-subtitle {
+            margin-top: 5px;
+
+            color: #91A0B3;
 
             font-size: 10px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .status {
+            color: var(--orange);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================
+           BUTTON
+        ========================================= */
+
+        .email-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 16px 26px;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--orange),
+                    var(--orange-dark)
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 10px 35px rgba(228,110,36,0.25);
+
+            transition: all 0.3s ease;
+        }
+
+
+        .email-button:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 16px 45px rgba(228,110,36,0.38);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--orange-light),
+                    var(--orange)
+                );
+        }
+
+
+        .email-icon {
+            font-size: 16px;
+        }
+
+
+        .arrow {
+            font-size: 17px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .email-button:hover .arrow {
+            transform: translateX(4px);
+        }
+
+
+        /* =========================================
+           COMPANY DETAILS
+        ========================================= */
+
+        .company-info {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 18px;
+
+            margin-top: 45px;
+
+            color: #8FA0B4;
+
+            font-size: 10px;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .company-info strong {
+            color: white;
+
+            font-weight: 600;
+        }
+
+
+        .company-separator {
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: var(--orange);
+
+            box-shadow:
+                0 0 8px rgba(228,110,36,0.5);
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding-top: 22px;
+
+            border-top: 1px solid var(--border);
+
+            color: #708197;
+
+            font-size: 9px;
 
             letter-spacing: 1px;
 
             text-transform: uppercase;
         }
 
+
         footer a {
-            color: #aaa;
+            color: var(--orange);
 
             text-decoration: none;
 
             text-transform: lowercase;
 
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
+
 
         footer a:hover {
-            color: #fff;
+            color: var(--orange-light);
         }
 
-        /* =========================
-           ANIMATIONS
-        ========================= */
 
-        @keyframes navIn {
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
+
+        @keyframes slideDown {
 
             from {
                 opacity: 0;
@@ -451,11 +688,12 @@
 
         }
 
-        @keyframes heroIn {
+
+        @keyframes heroUp {
 
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(35px);
             }
 
             to {
@@ -465,19 +703,23 @@
 
         }
 
+
         @keyframes pulse {
 
             0%, 100% {
                 box-shadow:
-                    0 0 0 5px rgba(255,255,255,0.05);
+                    0 0 0 5px rgba(228,110,36,0.10),
+                    0 0 12px rgba(228,110,36,0.45);
             }
 
             50% {
                 box-shadow:
-                    0 0 0 10px rgba(255,255,255,0.015);
+                    0 0 0 10px rgba(228,110,36,0.02),
+                    0 0 22px rgba(228,110,36,0.65);
             }
 
         }
+
 
         @keyframes rotate {
 
@@ -491,9 +733,23 @@
 
         }
 
-        /* =========================
+
+        @keyframes floatGlow {
+
+            0%, 100% {
+                transform: translate(0,0);
+            }
+
+            50% {
+                transform: translate(-30px,25px);
+            }
+
+        }
+
+
+        /* =========================================
            MOBILE
-        ========================= */
+        ========================================= */
 
         @media (max-width: 700px) {
 
@@ -501,51 +757,72 @@
                 padding: 22px 6%;
             }
 
+
             nav {
                 padding-bottom: 20px;
             }
 
+
             .logo {
-                width: 210px;
+                width: 220px;
+
                 max-width: 70%;
             }
+
 
             .nav-right {
                 display: none;
             }
 
+
             main {
-                padding: 60px 0;
+                padding: 55px 0;
             }
+
 
             h1 {
                 font-size: 55px;
+
                 letter-spacing: -3px;
             }
 
+
             .description {
-                font-size: 14px;
-                line-height: 1.8;
+                font-size: 13px;
+
+                line-height: 1.85;
             }
 
-            .maintenance-card {
+
+            .maintenance-box {
                 padding: 17px;
+
+                border-radius: 12px;
             }
 
-            .status-text {
+
+            .status {
                 display: none;
             }
+
 
             .company-info {
                 flex-direction: column;
-                gap: 10px;
 
-                margin-top: 40px;
+                gap: 9px;
+
+                margin-top: 35px;
+
+                line-height: 1.5;
+
+                text-align: center;
             }
 
-            .separator {
+
+            .company-separator {
                 display: none;
             }
+
 
             footer {
                 flex-direction: column;
@@ -560,34 +837,47 @@
     </style>
 </head>
 
+
 <body>
 
-    <!-- Background -->
+
+    <!-- =========================================
+         BACKGROUND
+    ========================================== -->
+
     <div class="background">
+
         <div class="grid"></div>
-        <div class="glow glow-one"></div>
-        <div class="glow glow-two"></div>
+
+        <div class="orb orb-one"></div>
+
+        <div class="orb orb-two"></div>
+
+        <div class="orange-glow"></div>
+
     </div>
+
 
 
     <div class="page">
 
-        <!-- =========================
+
+        <!-- =========================================
              NAVBAR
-        ========================== -->
+        ========================================== -->
 
         <nav>
 
-            <!-- Your Aspire Logo -->
             <img
                 src="logo.png"
                 alt="Aspire Management Consulting W.L.L."
                 class="logo"
             >
 
+
             <div class="nav-right">
 
-                <span class="live-dot"></span>
+                <span class="status-dot"></span>
 
                 Website Maintenance
 
@@ -596,45 +886,55 @@
         </nav>
 
 
-        <!-- =========================
-             MAIN
-        ========================== -->
+
+        <!-- =========================================
+             HERO
+        ========================================== -->
 
         <main>
 
             <section class="hero">
 
+
                 <div class="eyebrow">
+
                     We'll Be Back Soon
+
                 </div>
+
 
 
                 <h1>
 
-                    We're Making<br>
+                    We're Making
 
-                    <span class="outline">Things Better.</span>
+                    <br>
+
+                    <span class="orange">Things</span>
+
+                    <span class="outline"> Better.</span>
 
                 </h1>
+
 
 
                 <p class="description">
 
                     Our website is currently undergoing scheduled
-                    maintenance as we work on creating a better
-                    digital experience for you.
+                    maintenance as we enhance our digital experience.
 
                     <br>
 
-                    Thank you for your patience.
-                    We'll be back online shortly.
+                    We appreciate your patience and look forward
+                    to welcoming you back soon.
 
                 </p>
 
 
+
                 <!-- Maintenance Status -->
 
-                <div class="maintenance-card">
+                <div class="maintenance-box">
 
                     <div class="maintenance-left">
 
@@ -642,14 +942,21 @@
                             ⚙
                         </div>
 
+
                         <div>
 
                             <div class="maintenance-title">
+
                                 Website Under Maintenance
+
                             </div>
 
+
                             <div class="maintenance-subtitle">
-                                Improving our digital experience
+
+                                We're working behind the scenes
+                                to serve you better.
+
                             </div>
 
                         </div>
@@ -657,44 +964,52 @@
                     </div>
 
 
-                    <div class="status-text">
+                    <div class="status">
+
                         In Progress
+
                     </div>
 
                 </div>
 
 
-                <!-- Email -->
+
+                <!-- Email Button -->
 
                 <a
                     href="mailto:info@aspiregroupglobal.com"
                     class="email-button"
                 >
 
-                    <span class="email-icon">✉</span>
+                    <span class="email-icon">
+                        ✉
+                    </span>
 
                     Contact Us
 
-                    <span>→</span>
+                    <span class="arrow">
+                        →
+                    </span>
 
                 </a>
+
 
 
                 <!-- Company Information -->
 
                 <div class="company-info">
 
-                    <span>
+                    <strong>
                         ASPIRE MANAGEMENT CONSULTING W.L.L.
-                    </span>
+                    </strong>
 
-                    <div class="separator"></div>
+                    <span class="company-separator"></span>
 
                     <span>
                         C.R. NO. 250399
                     </span>
 
-                    <div class="separator"></div>
+                    <span class="company-separator"></span>
 
                     <span>
                         Doha, Qatar
@@ -702,28 +1017,30 @@
 
                 </div>
 
+
             </section>
 
         </main>
 
 
-        <!-- =========================
+
+        <!-- =========================================
              FOOTER
-        ========================== -->
+        ========================================== -->
 
         <footer>
 
-            <div>
+            <span>
                 © 2026 Aspire Management Consulting W.L.L.
-            </div>
+            </span>
 
-            <div>
-                <a href="mailto:info@aspiregroupglobal.com">
-                    info@aspiregroupglobal.com
-                </a>
-            </div>
+
+            <a href="mailto:info@aspiregroupglobal.com">
+                info@aspiregroupglobal.com
+            </a>
 
         </footer>
+
 
     </div>
 
