@@ -1,0 +1,22 @@
+import { useState, type FormEvent } from 'react';
+import { Link } from '@tanstack/react-router';
+import { useServerFn } from '@tanstack/react-start';
+import { ArrowUpRight, CheckCircle2, Loader2, Upload } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { inquirySchema, validateCV } from '@/lib/form-schema';
+import { submitInquiry } from '@/lib/inquiries.functions';
+import { industries } from './content';
+export function InquiryForm({kind}:{kind:'contact'|'employer'|'cv'}) {
+ const submit = useServerFn(submitInquiry);
+ const [errors,setErrors]=useState<Record<string,string>>({}); const [busy,setBusy]=useState(false); const [success,setSuccess]=useState(false); const [fileName,setFileName]=useState('');
+ async function onSubmit(event:FormEvent<HTMLFormElement>) {
+  event.preventDefault(); const form=event.currentTarget; const fd=new FormData(form); fd.set('kind',kind); fd.set('consent',fd.get('consent')==='on'?'true':'false');
+  const check=inquirySchema.safeParse({...Object.fromEntries(fd.entries()),consent:fd.get('consent')==='true'});
+  const next:Record<string,string>={}; if(!check.success) check.error.issues.forEach(e=>{ next[String(e.path[0])]=e.message; });
+  if(kind==='cv') {const cv=fd.get('cv'); if(!(cv instanceof File)||!cv.size) next['cv']='Please attach your CV.'; else {const err=validateCV(cv); if(err) next['cv']=err;}}
+  setErrors(next); if(Object.keys(next).length) return;
+  setBusy(true); try { const result=await submit({data:fd}); if(result.saved) {setSuccess(true); form.reset();setFileName('');} } catch(e) {setErrors({form:e instanceof Error?e.message:'Unable to save your request. Please try again.'});} finally {setBusy(false);}
+ }
+ const field=(name:string,label:string,type='text',required=true)=><label className="form-field">{label}{required&&<span className="text-primary"> *</span>}<input name={name} type={type} required={required} maxLength={name==='email'?254:150} aria-invalid={!!errors[name]} aria-describedby={errors[name]?`${name}-error`:undefined}/>{errors[name]&&<small id={`${name}-error`} className="form-error">{errors[name]}</small>}</label>;
+ return <div className="inquiry-panel">{success?<div className="form-success" role="status"><CheckCircle2 size={40}/><h2>{kind==='cv'?'Your CV has been received.':'Your request has been received.'}</h2><p>Your details have been securely saved for Aspire to review.</p><Button variant="outline" onClick={()=>setSuccess(false)}>Send another request</Button></div>:<form onSubmit={onSubmit} noValidate><h2>{kind==='cv'?'Tell us about yourself':kind==='employer'?'Tell us about your hiring needs':'Send us a message'}</h2><div className="form-grid">{field('name','Full name')}{field('email','Email address','email')}{field('phone','Phone number','tel',false)}{kind==='employer'?field('company','Company name'):null}{kind!=='contact'&&<label className="form-field">{kind==='cv'?'Area of interest':'Industry'}<select name="industry"><option value="">Select an industry</option>{industries.map(i=><option key={i.title}>{i.title}</option>)}<option>Other</option></select></label>}</div><label className="form-field mt-5">{kind==='cv'?'Your experience & aspirations':'How can we help?'} <span className="text-primary">*</span><textarea name="message" rows={5} required maxLength={3000} aria-invalid={!!errors['message']}/>{errors['message']&&<small className="form-error">{errors['message']}</small>}</label>{kind==='cv'&&<label className="upload-field"><Upload size={24}/><span>{fileName||'Upload your CV'}</span><small>PDF only · Maximum 5 MB</small><input type="file" name="cv" accept=".pdf,application/pdf" onChange={e=>setFileName(e.target.files?.[0]?.name??'')}/>{errors['cv']&&<small className="form-error">{errors['cv']}</small>}</label>}<div className="honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off"/></label></div><label className="consent-field"><input type="checkbox" name="consent" required/><span>I agree to the <Link to="/privacy-policy">Privacy Policy</Link> and consent to Aspire using my details to respond to this {kind==='cv'?'application':'request'}.</span></label>{errors['consent']&&<p className="form-error">{errors['consent']}</p>}{errors['form']&&<p className="form-error" role="alert">{errors['form']}</p>}<Button type="submit" size="lg" disabled={busy}>{busy?<><Loader2 className="animate-spin"/>Submitting…</>:<>{kind==='cv'?'Submit Your CV':'Send Request'}<ArrowUpRight/></>}</Button></form>}</div>;
+}

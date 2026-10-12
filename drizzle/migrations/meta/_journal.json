@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791638105971,
+      "tag": "0000_aspire_inquiry_storage",
+      "breakpoints": true
+    }
+  ]
+}

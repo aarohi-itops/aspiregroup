@@ -1,0 +1,15 @@
+CREATE TABLE public.contact_submissions (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), created_at timestamptz NOT NULL DEFAULT now(), name text NOT NULL, email text NOT NULL, phone text, message text NOT NULL);
+GRANT ALL ON public.contact_submissions TO service_role;
+ALTER TABLE public.contact_submissions ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.employer_inquiries (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), created_at timestamptz NOT NULL DEFAULT now(), name text NOT NULL, email text NOT NULL, phone text, company text NOT NULL, industry text, message text NOT NULL);
+GRANT ALL ON public.employer_inquiries TO service_role;
+ALTER TABLE public.employer_inquiries ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.cv_submissions (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), created_at timestamptz NOT NULL DEFAULT now(), name text NOT NULL, email text NOT NULL, phone text, industry text, message text NOT NULL, cv_path text NOT NULL);
+GRANT ALL ON public.cv_submissions TO service_role;
+ALTER TABLE public.cv_submissions ENABLE ROW LEVEL SECURITY;
+CREATE TABLE public.form_rate_limits (key text PRIMARY KEY, window_start timestamptz NOT NULL, requests integer NOT NULL);
+GRANT ALL ON public.form_rate_limits TO service_role;
+ALTER TABLE public.form_rate_limits ENABLE ROW LEVEL SECURITY;
+CREATE FUNCTION public.accept_form_request(input_key text) RETURNS boolean LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$ DECLARE total integer; BEGIN INSERT INTO public.form_rate_limits(key, window_start, requests) VALUES(input_key, now(), 1) ON CONFLICT(key) DO UPDATE SET requests = CASE WHEN form_rate_limits.window_start < now() - interval '1 hour' THEN 1 ELSE form_rate_limits.requests + 1 END, window_start = CASE WHEN form_rate_limits.window_start < now() - interval '1 hour' THEN now() ELSE form_rate_limits.window_start END RETURNING requests INTO total; RETURN total <= 5; END; $$;
+REVOKE ALL ON FUNCTION public.accept_form_request(text) FROM PUBLIC, anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.accept_form_request(text) TO service_role;
